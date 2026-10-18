@@ -9,6 +9,13 @@ class Settings(BaseSettings):
     PORT: int = 8000
     SECRET_KEY: str = "your-secret-key-here"
     DATABASE_URL: str = "postgresql+psycopg://postgres:postgres@localhost:5432/sachcheck_db"
+    GOOGLE_FACT_CHECK_API_KEY: str = ""
+    GOOGLE_FACT_CHECK_API_URL: str = "https://factchecktools.googleapis.com/v1alpha1/claims:search"
+    FACT_CHECK_TIMEOUT_SECONDS: float = 10.0
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-3.5-flash-lite"
+    GEMINI_API_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta"
+    GEMINI_TIMEOUT_SECONDS: float = 20.0
 
     @property
     def sync_database_url(self) -> str:

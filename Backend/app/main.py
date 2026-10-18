@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from app.api.claims import router as claims_router
+from app.api.stats import router as stats_router
 from app.db.session import check_db_connection
 
 app = FastAPI(
@@ -12,6 +13,8 @@ app = FastAPI(
 
 # Register API routers
 app.include_router(claims_router)
+app.include_router(stats_router)
+
 
 
 @app.get("/health")
