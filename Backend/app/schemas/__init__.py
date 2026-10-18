@@ -3,6 +3,9 @@ from app.schemas.claim import (
     ClaimCheckResponse,
     FactCheckItem,
     GeminiReport,
+    SemanticCandidateItem,
+    SemanticCandidateSearchRequest,
+    SemanticCandidateSearchResponse,
     TrendingClaimItem,
 )
 from app.schemas.stats import PlatformStatsResponse
@@ -14,6 +17,9 @@ __all__ = [
     "GeminiReport",
     "TrendingClaimItem",
     "PlatformStatsResponse",
+    "SemanticCandidateItem",
+    "SemanticCandidateSearchRequest",
+    "SemanticCandidateSearchResponse",
 ]
 
 

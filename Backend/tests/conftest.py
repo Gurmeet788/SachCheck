@@ -27,12 +27,42 @@ TestingSessionLocal = sessionmaker(
 )
 
 
+from unittest.mock import AsyncMock, patch
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_environment():
     """Ensure safe testing environment variables are set."""
     os.environ["GOOGLE_FACT_CHECK_API_KEY"] = "test-google-factcheck-api-key"
     os.environ["GEMINI_API_KEY"] = "test-gemini-api-key"
     yield
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_embedding_generation_default():
+    """
+    Default autouse fixture providing an offline synthetic 768-dim vector
+    for claim check endpoints unless explicitly overridden in individual tests.
+    """
+    with patch("app.api.claims.generate_claim_embedding", new_callable=AsyncMock) as mock_embed:
+        mock_embed.return_value = [0.01] * 768
+        yield mock_embed
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_classify_claim_pair_default():
+    """
+    Default autouse fixture that prevents classify_claim_pair from making real
+    Gemini API calls in tests that do not explicitly mock it.
+
+    Returns UNCERTAIN by default so existing tests are completely unaffected by
+    the new semantic deduplication step – UNCERTAIN never merges claims.
+    """
+    with patch(
+        "app.api.claims.classify_claim_pair",
+        new_callable=AsyncMock,
+        return_value="UNCERTAIN",
+    ) as mock_classify:
+        yield mock_classify
 
 
 @pytest.fixture(scope="function")

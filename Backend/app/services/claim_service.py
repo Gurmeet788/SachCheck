@@ -1,7 +1,7 @@
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Optional
+from typing import List, Optional
 
 from fastapi import HTTPException, status
 from sqlalchemy import select
@@ -59,6 +59,7 @@ def check_or_record_claim(
     db: Session,
     claim_text: str,
     session_id: Optional[str] = None,
+    embedding: Optional[List[float]] = None,
 ) -> Claim:
     """
     Finds or creates a claim based on normalized text, records a search entry,
@@ -70,6 +71,7 @@ def check_or_record_claim(
     - Handles concurrent race conditions: catches IntegrityError during flush,
       rolls back, and re-fetches the newly created record.
     - Preserves the original claim_text of the initial submission.
+    - Stores 768-dim semantic embedding vector on new claims if available.
     """
     normalized = normalize_claim_text(claim_text)
     original_display_text = claim_text.strip()
@@ -88,11 +90,14 @@ def check_or_record_claim(
         if claim:
             # Existing claim found: update last checked timestamp and reuse
             claim.last_checked_at = now_utc
+            if claim.embedding is None and embedding is not None:
+                claim.embedding = embedding
         else:
             # New claim: insert into claims table with status 'unverified'
             claim = Claim(
                 claim_text=original_display_text,
                 normalized_text=normalized,
+                embedding=embedding,
                 status="unverified",
                 last_checked_at=now_utc,
             )

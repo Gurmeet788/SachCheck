@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     GEMINI_MODEL: str = "gemini-3.5-flash-lite"
     GEMINI_API_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta"
     GEMINI_TIMEOUT_SECONDS: float = 20.0
+    GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-001"
+    EMBEDDING_DIMENSION: int = 768
+    EMBEDDING_SIMILARITY_THRESHOLD: float = 0.85
+    EMBEDDING_TIMEOUT_SECONDS: float = 10.0
 
     @property
     def sync_database_url(self) -> str:

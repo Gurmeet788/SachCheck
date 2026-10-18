@@ -83,4 +83,47 @@ class TrendingClaimItem(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class SemanticCandidateItem(BaseModel):
+    claim_id: int = Field(..., description="Unique identifier of candidate claim.")
+    claim_text: str = Field(..., description="Statement of candidate claim.")
+    status: str = Field(..., description="Status of candidate claim.")
+    similarity_score: float = Field(..., description="Cosine similarity score (0.0 to 1.0).")
+    cosine_distance: float = Field(..., description="Cosine distance metric.")
+    has_negation_mismatch: bool = Field(
+        default=False,
+        description="Heuristic flag indicating a negation polarity mismatch between query and candidate.",
+    )
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class SemanticCandidateSearchRequest(BaseModel):
+    query_text: str = Field(
+        ...,
+        max_length=2000,
+        description="Statement text to find semantically similar candidate claims for.",
+    )
+    threshold: Optional[float] = Field(
+        default=None,
+        ge=0.0,
+        le=1.0,
+        description="Minimum cosine similarity threshold (default from settings).",
+    )
+    limit: int = Field(
+        default=5,
+        ge=1,
+        le=50,
+        description="Maximum candidate claims to retrieve.",
+    )
+
+
+class SemanticCandidateSearchResponse(BaseModel):
+    query_text: str
+    candidates_count: int
+    candidates: List[SemanticCandidateItem] = Field(default_factory=list)
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+
 
