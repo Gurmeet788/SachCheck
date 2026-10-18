@@ -58,7 +58,7 @@ export default function CopySummaryButton({ result }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-teal-950/80 hover:bg-teal-900 border border-teal-500/50 hover:border-teal-400 text-teal-300 hover:text-white text-xs font-semibold shadow-sm transition-all duration-150 active:scale-95"
+      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded-lg bg-teal-950/80 hover:bg-teal-900 border border-teal-500/50 hover:border-teal-400 text-teal-300 hover:text-white text-xs font-semibold shadow-sm transition-all duration-150 active:scale-95"
       title="Copy verification summary to clipboard for sharing on WhatsApp or Twitter"
     >
       {copied ? (

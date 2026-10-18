@@ -198,11 +198,11 @@ export default function VerificationResult({ result, onRetry, onCheckAnother }) 
         )}
 
         {/* Card Footer: Reset / Check Another Claim */}
-        <div className="mt-7 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-          <span>SachCheck • Misinformation Verification</span>
+        <div className="mt-7 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-400">
+          <span className="text-center sm:text-left">SachCheck • Misinformation Verification</span>
           <button
             onClick={onCheckAnother}
-            className="text-teal-400 hover:text-teal-300 font-medium hover:underline flex items-center gap-1"
+            className="text-teal-400 hover:text-teal-300 font-medium hover:underline flex items-center gap-1 shrink-0"
           >
             <span>Verify Another Claim</span>
             <ArrowRight className="w-3 h-3" />
