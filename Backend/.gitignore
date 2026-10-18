@@ -1,0 +1,74 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env.bak
+
+# ── Environment / secrets ──────────────────────────────────────────────────────
+# Keep .env.example (template) but never commit the real .env
+.env
+*.env
+!.env.example
+
+# ── Distribution / packaging ───────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+pip-wheel-metadata/
+share/python-wheels/
+wheels/
+
+# ── Testing & coverage ────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+*.cover
+*.log
+
+# ── Type checkers ─────────────────────────────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyright/
+.pytype/
+
+# ── Linters / formatters ──────────────────────────────────────────────────────
+.ruff_cache/
+
+# ── Alembic ───────────────────────────────────────────────────────────────────
+# Keep migration scripts but ignore compiled caches inside versions
+alembic/versions/__pycache__/
+
+# ── IDEs & editors ────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS artefacts ──────────────────────────────────────────────────────────────
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# ── Jupyter (if ever used for exploratory work) ───────────────────────────────
+.ipynb_checkpoints/
+
+# ── Temporary files ───────────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.orig
