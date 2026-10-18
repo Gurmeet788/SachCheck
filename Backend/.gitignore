@@ -1,0 +1,16 @@
+# Environment variables
+.env
+*.env
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest cache
+.pytest_cache/
