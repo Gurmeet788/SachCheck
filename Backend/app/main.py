@@ -5,10 +5,21 @@ from app.api.claims import router as claims_router
 from app.api.stats import router as stats_router
 from app.db.session import check_db_connection
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="SachCheck Backend",
     description="SachCheck automated fact checking backend service",
     version="1.0.0",
+)
+
+# Enable CORS for local dev and frontend clients
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register API routers
